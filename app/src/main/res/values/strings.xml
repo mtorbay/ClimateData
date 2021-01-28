@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">ClimateData</string>
+    <string name="txtTitle">Monthly Average Temperature</string>
+    <string name="txtYear">Year:</string>
+    <string name="txtJanLabels" />
+    <string name="txtJanLabel">January:</string>
+    <string name="txtFebLabel">February:</string>
+    <string name="txtMarLabel">March:</string>
+    <string name="txtAprLabell" />
+    <string name="txtAprLabel">April:</string>
+    <string name="txtMayLabel">May:</string>
+    <string name="txtJunLabel">June:</string>
+    <string name="txtJulLabel">July:</string>
+    <string name="txtAugLabel">August:</string>
+    <string name="txtSepLabel">September:</string>
+    <string name="txtOctLabel">October:</string>
+    <string name="txtNovLabel">November:</string>
+    <string name="txtDecLabel">December:</string>
+</resources>
