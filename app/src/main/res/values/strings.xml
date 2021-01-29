@@ -16,4 +16,16 @@
     <string name="txtOctLabel">October:</string>
     <string name="txtNovLabel">November:</string>
     <string name="txtDecLabel">December:</string>
+    <string name="txtJan">JANUARY</string>
+    <string name="txtFeb">FEBRUARY</string>
+    <string name="txtMar">MARCH</string>
+    <string name="txtApr">APRIL</string>
+    <string name="txtMay">MAY</string>
+    <string name="txtJun">JUNE</string>
+    <string name="txtJul">JULY</string>
+    <string name="txtAug">AUGUST</string>
+    <string name="txtSep">SEPTEMBER</string>
+    <string name="txtOct">OCTOBER</string>
+    <string name="txtNov">NOVEMBER</string>
+    <string name="txtDec">DECEMBER</string>
 </resources>
