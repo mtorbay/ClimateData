@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void afficher()
     {
-        String url="http://api.openweathermap.org/data/2.5/weather?q=Toronto&appid=9e06f9d4ef3186688fb86beca4cf51b6&units=metric";
+        String url="https://pkgstore.datahub.io/core/global-temp/monthly_json/data/4c7af7363a20648a68b8f2038a6765d6/monthly_json.json";
         JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
