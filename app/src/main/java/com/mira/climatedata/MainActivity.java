@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
         txtOct=findViewById(R.id.txtOct);
         txtNov=findViewById(R.id.txtNov);
         txtDec=findViewById(R.id.txtDec);
+
+        afficher();
     }
 
     public void afficher()
@@ -74,24 +76,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    JSONObject year_temp=response.getJSONObject("2016-12-06");
+                    /*JSONObject year_temp=response.getJSONObject("2016-12-06");
                     Log.d("main", "resultat ="+year_temp.toString());
 
                     //temp rounding
                     int TEMP1=(int)Math.round(year_temp.getDouble("Mean"));
                     String TEMP01=String.valueOf(TEMP1);
 
-                    // average temperatures per month
-                    String temp01=object.getString("TEMP01");
-                    //String temp02=object.getString("TEMP02");
-
                     txtYear.setText("2016");
+                    txtJan.setText(TEMP01); */
 
-                    Calendar calendar=Calendar.getInstance();
-                    SimpleDateFormat simpleDateFormat=new SimpleDateFormat("EEEE, MMMM dd");
-                    String formatted_date=simpleDateFormat.format(calendar.getTime());
-
-                    txtJan.setText(temp01);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
