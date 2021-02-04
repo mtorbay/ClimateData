@@ -11,6 +11,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -72,19 +73,23 @@ public class MainActivity extends AppCompatActivity {
     public void afficher()
     {
         String url="https://pkgstore.datahub.io/core/global-temp/monthly_json/data/4c7af7363a20648a68b8f2038a6765d6/monthly_json.json";
-        JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+        JsonArrayRequest jsonArrayRequest=new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
-            public void onResponse(JSONObject response) {
+            public void onResponse(JSONArray response) {
                 try {
-                    /*JSONObject year_temp=response.getJSONObject("2016-12-06");
-                    Log.d("main", "resultat ="+year_temp.toString());
+                    //Premier objet de l'array
+                    JSONObject jan=response.getJSONObject(0);
+
+                    //Log.d("premier", "resultat ="+premier.toString());
+                    Log.d("jan", "resultat ="+jan.getString("Date"));
 
                     //temp rounding
-                    int TEMP1=(int)Math.round(year_temp.getDouble("Mean"));
-                    String TEMP01=String.valueOf(TEMP1);
+                    int TEMPjan=(int)Math.round(jan.getDouble("Mean"));
+                    String TEMP01=String.valueOf(TEMPjan);
 
                     txtYear.setText("2016");
-                    txtJan.setText(TEMP01); */
+                    txtJan.setText(TEMP01);
+
 
 
                 } catch (JSONException e) {
@@ -98,6 +103,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         RequestQueue requestQueue= Volley.newRequestQueue(this);
-        requestQueue.add(jsonObjectRequest);
+        requestQueue.add(jsonArrayRequest);
     }
 }
