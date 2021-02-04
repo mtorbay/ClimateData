@@ -77,18 +77,73 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONArray response) {
                 try {
-                    //Premier objet de l'array
-                    JSONObject jan=response.getJSONObject(0);
+                    //Objets
+                    JSONObject dec=response.getJSONObject(0);
+                    JSONObject nov=response.getJSONObject(2);
+                    JSONObject oct=response.getJSONObject(4);
+                    JSONObject sep=response.getJSONObject(6);
+                    JSONObject aug=response.getJSONObject(8);
+                    JSONObject jul=response.getJSONObject(10);
+                    JSONObject jun=response.getJSONObject(12);
+                    JSONObject may=response.getJSONObject(14);
+                    JSONObject apr=response.getJSONObject(16);
+                    JSONObject mar=response.getJSONObject(18);
+                    JSONObject feb=response.getJSONObject(20);
+                    JSONObject jan=response.getJSONObject(22);
 
                     //Log.d("premier", "resultat ="+premier.toString());
-                    Log.d("jan", "resultat ="+jan.getString("Date"));
+                    Log.d("dec", "resultat ="+dec.getString("Date"));
 
-                    //temp rounding
-                    int TEMPjan=(int)Math.round(jan.getDouble("Mean"));
+                    //temp double --> string
+                    double TEMPjan=jan.getDouble("Mean");
                     String TEMP01=String.valueOf(TEMPjan);
+
+                    double TEMPfeb=feb.getDouble("Mean");
+                    String TEMP02=String.valueOf(TEMPfeb);
+
+                    double TEMPmar=mar.getDouble("Mean");
+                    String TEMP03=String.valueOf(TEMPmar);
+
+                    double TEMPapr=apr.getDouble("Mean");
+                    String TEMP04=String.valueOf(TEMPapr);
+
+                    double TEMPmay=may.getDouble("Mean");
+                    String TEMP05=String.valueOf(TEMPmay);
+
+                    double TEMPjun=jun.getDouble("Mean");
+                    String TEMP06=String.valueOf(TEMPjun);
+
+                    double TEMPjul=jul.getDouble("Mean");
+                    String TEMP07=String.valueOf(TEMPjul);
+
+                    double TEMPaug=aug.getDouble("Mean");
+                    String TEMP08=String.valueOf(TEMPaug);
+
+                    double TEMPsep=sep.getDouble("Mean");
+                    String TEMP09=String.valueOf(TEMPsep);
+
+                    double TEMPoct=oct.getDouble("Mean");
+                    String TEMP10=String.valueOf(TEMPoct);
+
+                    double TEMPnov=nov.getDouble("Mean");
+                    String TEMP11=String.valueOf(TEMPnov);
+
+                    double TEMPdec=dec.getDouble("Mean");
+                    String TEMP12=String.valueOf(TEMPdec);
 
                     txtYear.setText("2016");
                     txtJan.setText(TEMP01);
+                    txtFeb.setText(TEMP02);
+                    txtMar.setText(TEMP03);
+                    txtApr.setText(TEMP04);
+                    txtMay.setText(TEMP05);
+                    txtJun.setText(TEMP06);
+                    txtJul.setText(TEMP07);
+                    txtAug.setText(TEMP08);
+                    txtSep.setText(TEMP09);
+                    txtOct.setText(TEMP10);
+                    txtNov.setText(TEMP11);
+                    txtDec.setText(TEMP12);
 
 
 
