@@ -1,10 +1,13 @@
 package com.mira.climatedata;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -31,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
     // textviews that will actually have data
     TextView txtJan, txtFeb, txtMar, txtApr, txtMay, txtJun, txtJul, txtAug, txtSep, txtOct, txtNov, txtDec;
+
+    String year="2016";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +75,31 @@ public class MainActivity extends AppCompatActivity {
         afficher();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search, menu);
+        MenuItem menuItem=menu.findItem(R.id.action_search);
+        SearchView searchView=(SearchView)menuItem.getActionView();
+        searchView.setQueryHint("Enter a year");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                year=query;
+                int yearInt=Integer.parseInt(year);
+                int date=(-24*(yearInt-2011)+120);
+                afficher();
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
     public void afficher()
     {
         String url="https://pkgstore.datahub.io/core/global-temp/monthly_json/data/4c7af7363a20648a68b8f2038a6765d6/monthly_json.json";
@@ -77,74 +107,78 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONArray response) {
                 try {
-                    //Objets
-                    JSONObject dec=response.getJSONObject(0);
-                    JSONObject nov=response.getJSONObject(2);
-                    JSONObject oct=response.getJSONObject(4);
-                    JSONObject sep=response.getJSONObject(6);
-                    JSONObject aug=response.getJSONObject(8);
-                    JSONObject jul=response.getJSONObject(10);
-                    JSONObject jun=response.getJSONObject(12);
-                    JSONObject may=response.getJSONObject(14);
-                    JSONObject apr=response.getJSONObject(16);
-                    JSONObject mar=response.getJSONObject(18);
-                    JSONObject feb=response.getJSONObject(20);
-                    JSONObject jan=response.getJSONObject(22);
 
-                    //Log.d("premier", "resultat ="+premier.toString());
-                    Log.d("dec", "resultat ="+dec.getString("Date"));
+                    int yearInt=Integer.parseInt(year);
+                    // equation: https://www.desmos.com/calculator/3y901fs87p
+                    int date=(-24*(yearInt-2011)+120);
 
-                    //temp double --> string
-                    double TEMPjan=jan.getDouble("Mean");
-                    String TEMP01=String.valueOf(TEMPjan);
+                        // Objects
+                        JSONObject dec = response.getJSONObject(0 + date);
+                        JSONObject nov = response.getJSONObject(2 + date);
+                        JSONObject oct = response.getJSONObject(4 + date);
+                        JSONObject sep = response.getJSONObject(6 + date);
+                        JSONObject aug = response.getJSONObject(8 + date);
+                        JSONObject jul = response.getJSONObject(10 + date);
+                        JSONObject jun = response.getJSONObject(12 + date);
+                        JSONObject may = response.getJSONObject(14 + date);
+                        JSONObject apr = response.getJSONObject(16 + date);
+                        JSONObject mar = response.getJSONObject(18 + date);
+                        JSONObject feb = response.getJSONObject(20 + date);
+                        JSONObject jan = response.getJSONObject(22 + date);
 
-                    double TEMPfeb=feb.getDouble("Mean");
-                    String TEMP02=String.valueOf(TEMPfeb);
+                        Log.d("dec", "resultat =" + dec.getString("Date"));
 
-                    double TEMPmar=mar.getDouble("Mean");
-                    String TEMP03=String.valueOf(TEMPmar);
+                        //temp double --> string
+                        double TEMPjan = jan.getDouble("Mean");
+                        String TEMP01 = String.valueOf(TEMPjan);
 
-                    double TEMPapr=apr.getDouble("Mean");
-                    String TEMP04=String.valueOf(TEMPapr);
+                        double TEMPfeb = feb.getDouble("Mean");
+                        String TEMP02 = String.valueOf(TEMPfeb);
 
-                    double TEMPmay=may.getDouble("Mean");
-                    String TEMP05=String.valueOf(TEMPmay);
+                        double TEMPmar = mar.getDouble("Mean");
+                        String TEMP03 = String.valueOf(TEMPmar);
 
-                    double TEMPjun=jun.getDouble("Mean");
-                    String TEMP06=String.valueOf(TEMPjun);
+                        double TEMPapr = apr.getDouble("Mean");
+                        String TEMP04 = String.valueOf(TEMPapr);
 
-                    double TEMPjul=jul.getDouble("Mean");
-                    String TEMP07=String.valueOf(TEMPjul);
+                        double TEMPmay = may.getDouble("Mean");
+                        String TEMP05 = String.valueOf(TEMPmay);
 
-                    double TEMPaug=aug.getDouble("Mean");
-                    String TEMP08=String.valueOf(TEMPaug);
+                        double TEMPjun = jun.getDouble("Mean");
+                        String TEMP06 = String.valueOf(TEMPjun);
 
-                    double TEMPsep=sep.getDouble("Mean");
-                    String TEMP09=String.valueOf(TEMPsep);
+                        double TEMPjul = jul.getDouble("Mean");
+                        String TEMP07 = String.valueOf(TEMPjul);
 
-                    double TEMPoct=oct.getDouble("Mean");
-                    String TEMP10=String.valueOf(TEMPoct);
+                        double TEMPaug = aug.getDouble("Mean");
+                        String TEMP08 = String.valueOf(TEMPaug);
 
-                    double TEMPnov=nov.getDouble("Mean");
-                    String TEMP11=String.valueOf(TEMPnov);
+                        double TEMPsep = sep.getDouble("Mean");
+                        String TEMP09 = String.valueOf(TEMPsep);
 
-                    double TEMPdec=dec.getDouble("Mean");
-                    String TEMP12=String.valueOf(TEMPdec);
+                        double TEMPoct = oct.getDouble("Mean");
+                        String TEMP10 = String.valueOf(TEMPoct);
 
-                    txtYear.setText("2016");
-                    txtJan.setText(TEMP01);
-                    txtFeb.setText(TEMP02);
-                    txtMar.setText(TEMP03);
-                    txtApr.setText(TEMP04);
-                    txtMay.setText(TEMP05);
-                    txtJun.setText(TEMP06);
-                    txtJul.setText(TEMP07);
-                    txtAug.setText(TEMP08);
-                    txtSep.setText(TEMP09);
-                    txtOct.setText(TEMP10);
-                    txtNov.setText(TEMP11);
-                    txtDec.setText(TEMP12);
+                        double TEMPnov = nov.getDouble("Mean");
+                        String TEMP11 = String.valueOf(TEMPnov);
 
+                        double TEMPdec = dec.getDouble("Mean");
+                        String TEMP12 = String.valueOf(TEMPdec);
+
+                        // setting textView values w/ data
+                        txtYear.setText(year);
+                        txtJan.setText(TEMP01+"°C");
+                        txtFeb.setText(TEMP02+"°C");
+                        txtMar.setText(TEMP03+"°C");
+                        txtApr.setText(TEMP04+"°C");
+                        txtMay.setText(TEMP05+"°C");
+                        txtJun.setText(TEMP06+"°C");
+                        txtJul.setText(TEMP07+"°C");
+                        txtAug.setText(TEMP08+"°C");
+                        txtSep.setText(TEMP09+"°C");
+                        txtOct.setText(TEMP10+"°C");
+                        txtNov.setText(TEMP11+"°C");
+                        txtDec.setText(TEMP12+"°C");
 
 
                 } catch (JSONException e) {
